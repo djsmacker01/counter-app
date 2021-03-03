@@ -12,17 +12,33 @@ class Counter extends Component {
     return count === 0 ? 'Zero' : count
   }
 
+  styles = {
+    fontSize: 18,
+    fontWeight: 'bold'
+  };
   render() { 
+    // let classes = ' '
 
+    // classes = this.getBadgeClasses(classes);
     return ( 
       
       <div>
         
-        <span className="badge badge-primary m-2">{ this.formatCount()}</span>
-        <button>Increment</button>
+        <span style={this.styles} className={this.getBadgeClasses()}>{ this.formatCount()}</span>
+        <button className="btn badge-secondary btn-sm">Increment</button>
       </div>
       
      );
+  }
+
+  getBadgeClasses(classes) {
+    if (this.state.count === 0) {
+      classes = 'badge m-2 badge-warning';
+    }
+    else {
+      classes = 'badge m-2 badge-primary';
+    }
+    return classes;
   }
 }
  
