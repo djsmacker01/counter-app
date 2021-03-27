@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 class CounterHandler extends Component {
   state = {
-    count: 0
+    value:this.props.counter.value 
   };
   // constructor() {
   //   super();
@@ -12,8 +12,8 @@ class CounterHandler extends Component {
   // instead of using the bind method ,use an arrow function on the method or function you want to bind
 
   formatCount() {
-    const {count} = this.state
-    return count === 0 ? 'Zero' : count
+    const {value} = this.state
+    return value === 0 ? 'Zero' : value
   }
 
   styles = {
@@ -21,23 +21,28 @@ class CounterHandler extends Component {
     fontWeight: 'bold'
   };
   handleIncrement = product => {
-    console.log(product)
-    this.setState({count: this.state.count + 1})
-    // console.log('Increment button clicked' , this)
+    
+    this.setState({value: this.state.value + 1})
+    
   }
-
-  render() { 
-    return ( 
+ 
+  render() {
+    console.log( this.props);
+   
+    return (
+      
       <div>
+       
         <span style={this.styles} className={this.getBadgeClasses()}>{ this.formatCount()}</span>
         <button
           onClick={() => this.handleIncrement()}
           className="btn badge-secondary btn-sm">Increment</button>
+        <button onClick={()=>this.props.onDelete(this.props.counter.id )} className="btn btn-danger btn-sm m-2">Delete</button>
       </div>
      );
   }
    getBadgeClasses(classes) {
-     if (this.state.count === 0) {
+     if (this.state.value === 0) {
        classes = 'badge m-2 badge-warning';
      }
      else {
